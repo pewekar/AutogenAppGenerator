@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AutoGen Script Generator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body onload="initializePage()">
+    <h1>AutoGen Script Generator</h1>
+
+    <div class="input-group">
+        <label for="useEnvVar">Use Environment Variable:</label>
+        <input type="checkbox" id="useEnvVar" onclick="toggleAPIKeyBox()">
+    </div>
+
+    <div class="input-group" id="apiKeyGroup">
+        <label for="apiKey">API Key:</label>
+        <input type="text" id="apiKey">
+    </div>
+
+        <div class="input-group">
+        <label for="model">Select Model:</label>
+        <select id="model">
+            <option value="gpt-4">gpt-4</option>
+            <option value="gpt4">gpt4</option>
+            <option value="gpt-4-32k">gpt-4-32k</option>
+            <option value="gpt-4-32k-0314">gpt-4-32k-0314</option>
+            <option value="gpt-4-32k-v0314">gpt-4-32k-v0314</option>
+            <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+        </select>
+    </div>
+
+    <div id="assistantAgents">
+        <div class="input-group" id="assistant_0">
+            <label for="assistantName_0">Assistant Agent Name:</label>
+            <input type="text" id="assistantName_0" value="assistant">
+        </div>
+    </div>
+    <button onclick="addAssistantAgent()">Add Another Assistant Agent</button>
+
+    <div class="input-group">
+        <label for="userProxyName">User Proxy Agent Name:</label>
+        <input type="text" id="userProxyName" value="user_proxy">
+    </div>
+
+    <div class="input-group">
+        <label for="task">Task:</label>
+        <input type="text" id="task">
+    </div>
+    
+    <button onclick="generateScript()">Generate Script</button>
+    <button onclick="copyToClipboard()">Copy</button>
+
+    <textarea id="generatedScript" class="full-height"></textarea>
+</body>
+</html>

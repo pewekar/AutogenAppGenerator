@@ -1,0 +1,4 @@
+.full-height {
+    height: calc(100vh - 200px); /* Adjust 200px based on your header and other elements */
+    width: 100%;
+}
