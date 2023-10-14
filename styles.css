@@ -1,3 +1,19 @@
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: inline-block;
+    width: 200px;
+}
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+.padded-input {
+    margin-left: 1em;   /*Add space to the left */
+    margin-right: 1em;  /* Add space to the right */
+}
 .full-height {
     height: calc(100vh - 200px); /* Adjust 200px based on your header and other elements */
     width: 100%;
