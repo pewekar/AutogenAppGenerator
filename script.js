@@ -9,10 +9,10 @@ function initializePage() {
     const apiKeyGroup = document.getElementById("apiKeyGroup");
 
     // Uncheck the "Use Environment Variable" checkbox
-    useEnvVarCheckbox.checked = false;
+    useEnvVarCheckbox.checked = true;
 
     // Show the API key box
-    apiKeyGroup.style.display = "block";
+    apiKeyGroup.style.display = "none";
 }
 
 function addAssistantAgent() {
