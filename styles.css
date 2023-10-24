@@ -18,3 +18,18 @@
     height: calc(100vh - 200px); /* Adjust 200px based on your header and other elements */
     width: 100%;
 }
+
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+label[for='task'] {
+    margin-right: 10px; /* Optional: Adds some spacing between the label and the input box */
+}
+
+#task {
+    flex-grow: 1; /* Makes the input box grow to take up the remaining space */
+    width: 100%; /* Ensures the input box starts at full width */
+}
