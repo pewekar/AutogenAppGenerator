@@ -14,6 +14,12 @@ function initializePage() {
     // Show the API key box
     apiKeyGroup.style.display = "none";
 }
+function removeAssistantAgent(id) {
+    const assistantDiv = document.getElementById(id);
+    if (assistantDiv) {
+        assistantDiv.remove();
+    }
+}
 
 function addAssistantAgent() {
     const newAssistantDiv = document.createElement('div');
@@ -42,6 +48,20 @@ function addAssistantAgent() {
 
     newAssistantDiv.appendChild(newSystemMessageLabel);
     newAssistantDiv.appendChild(newSystemMessageInput);
+
+    // new code
+    const newAddButton = document.createElement('button');  // New code
+    newAddButton.className = 'add-button';  // New code
+    newAddButton.innerHTML = '+';  // New code
+    newAddButton.onclick = addAssistantAgent;  // New code
+    newAssistantDiv.appendChild(newAddButton);  // New code
+
+    const newRemoveButton = document.createElement('button');
+    newRemoveButton.className = 'remove-button';
+    newRemoveButton.innerHTML = '-';
+    newRemoveButton.onclick = () => removeAssistantAgent(newAssistantDiv.id);
+    newAssistantDiv.appendChild(newRemoveButton);
+    // new code ends
 
     document.getElementById('assistantAgents').appendChild(newAssistantDiv);
     assistantCount++;
@@ -97,18 +117,40 @@ function generateScript() {
     script += `is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),\n`;
     script += `code_execution_config={"work_dir": "web"},\n`;
     script += `llm_config=llm_config,\n`;
-    script += `system_message=\"\"\"Reply TERMINATE if the task has been solved at full satisfaction.\n`;
+    script += `system_message=\"\"\"A human admin\"\"\"\n`; 
+/*  script += `system_message=\"\"\"Reply TERMINATE if the task has been solved at full satisfaction.\n`;
     script += `Otherwise, reply CONTINUE, or the reason why the task is not solved yet.\"\"\"\n`;
     script += `)\n`;
-    script += `userProxy.initiate_chat(assistant_0, message="${task}")\n`;
+    script += `userProxy.initiate_chat(assistant_0, message="${task}")\n`;*/
+        // Check the number of Assistant Agents
+    if (assistantCount === 1) {
+    // If there's only one Assistant Agent
+    script += `userProxy.initiate_chat(assistant_0, message="${task}", clear_history=True)\n`;
+    } else {
+    // If there's more than one Assistant Agent
+    script += `# Create groupchat\n`;
+    script += `groupchat = autogen.GroupChat(\n`;
+    script += `    agents=[userProxy`;
 
+    // Add the assistant agents to the groupchat
+    for (let i = 0; i < assistantCount; i++) {
+        script += `, assistant_${i}`;
+    }
 
+    script += `], messages=[])\n`;
+    script += `manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)\n`;
 
+    script += `\n# Start the conversation\n`;
+    script += `userProxy.initiate_chat(\n`;
+    script += `    manager, message="${task}")\n`;
+    // ... rest of your existing code for handling multiple Assistant Agents ...
+    }
+/*
     script += `# Pass responses between multiple AssistantAgents\n`;
     for (let i = 0; i < assistantCount - 1; i++) {
         script += `response = userProxy.get_last_response(assistant_${i})\n`;
         script += `next_response = userProxy.send_message(assistant_${i + 1}, message=response['choices'][0]['message']['content'])\n`;
     }
-
+*/
     document.getElementById("generatedScript").value = script;
 }
