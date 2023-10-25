@@ -25,6 +25,11 @@
     width: 100%;
 }
 
+.input-group #systemMessage_0, 
+.input-group [id^='systemMessage_'] {
+    width: 800px; /* 4x width */
+}
+
 label[for='task'] {
     margin-right: 10px; /* Optional: Adds some spacing between the label and the input box */
 }
@@ -33,3 +38,26 @@ label[for='task'] {
     flex-grow: 1; /* Makes the input box grow to take up the remaining space */
     width: 100%; /* Ensures the input box starts at full width */
 }
+.add-button, .remove-button {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px 1px;
+    cursor: pointer;
+    border-radius: 6px; /* Adjusted from 12px to 6px */
+}
+
+.add-button {
+    background-color: #008CBA; /* Blue background */
+    padding: 5px 12px; /* Adjusted from 10px 24px to 5px 12px */
+    font-size: 16px;   /* Adjusted from 16px to 8px */
+}
+
+.remove-button {
+    background-color: #f44336; /* Red background */
+    padding: 5px 12px; /* Adjusted from 10px 24px to 5px 12px */
+    font-size: 16px;   /* Adjusted from 16px to 8px */
+}
+
