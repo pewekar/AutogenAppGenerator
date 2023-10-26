@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Add this inside the <head> tag -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/15.0.0-canary.15/material-components-web.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/15.0.0-canary.15/material-components-web.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoGen Script Generator</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -22,7 +28,7 @@
 
     <div class="input-group" id="apiKeyGroup" style="display: none;">
         <label for="apiKey">API Key:</label>
-        <input type="text" id="apiKey" name="apiKey" value="<YOUR_API_KEY>">
+        <input type="text" id="apiKey" name="apiKey" placeholder="Enter your API key here">
     </div>
 
     <div class="input-group">
@@ -36,16 +42,17 @@
         </select>
     </div>
 
-    <div id="assistantAgents">
-        <div class="input-group" id="assistant_0">
-            <label for="assistantName_0">Assistant Agent Name:</label>
-            <input type="text" id="assistantName_0" value="assistant" class="padded-input">
-            <label for="systemMessage_0">System Message:</label>
-            <input type="text" id="systemMessage_0" name="systemMessage_0" value="You are a helpful AI assistant. You suggest coding and reasoning steps for another AI assistant to accomplish a task. Do not suggest concrete code. For any action beyond writing code or reasoning, convert it to a step which can be implemented by writing code. For example, the action of browsing the web can be implemented by writing code which reads and prints the content of a web page. Finally, inspect the execution result. If the plan is not good, suggest a better plan. If the execution is wrong, analyze the error and suggest a fix."> <!-- Updated line -->
-            <button class="add-button" onclick="addAssistantAgent()">+</button> <!-- New Add button -->
+    <div class="agent-group">
+        <div id="assistantAgents">
+            <div class="input-group" id="assistant_0">
+                <label for="assistantName_0">Assistant Agent Name:</label>
+                <input type="text" id="assistantName_0" value="assistant" class="padded-input">
+                <label for="systemMessage_0">System Message:</label>
+                <input type="text" id="systemMessage_0" name="systemMessage_0" value="You are a helpful AI assistant. You suggest coding and reasoning steps for another AI assistant to accomplish a task.">
+                <button class="add-button" onclick="addAssistantAgent()">+</button>
+            </div>
         </div>
     </div>
-    <!--button onclick="addAssistantAgent()">Add Another Assistant Agent</button> -->
 
     <div class="input-group">
         <label for="userProxyName">User Proxy Agent Name:</label>
@@ -54,7 +61,7 @@
 
     <div class="input-group">
         <label for="task">Task:</label>
-        <input type="text" id="task">
+        <input type="text" id="task" placeholder="Enter the task here">
     </div>
     
     <div class="flex-container">
