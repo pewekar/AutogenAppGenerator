@@ -117,7 +117,7 @@ function generateScript() {
     script += `is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),\n`;
     script += `code_execution_config={"work_dir": "web"},\n`;
     script += `llm_config=llm_config,\n`;
-    script += `system_message=\"\"\"A human admin\"\"\"\n`; 
+    script += `system_message=\"\"\"A human admin\"\"\")\n`; 
 /*  script += `system_message=\"\"\"Reply TERMINATE if the task has been solved at full satisfaction.\n`;
     script += `Otherwise, reply CONTINUE, or the reason why the task is not solved yet.\"\"\"\n`;
     script += `)\n`;
