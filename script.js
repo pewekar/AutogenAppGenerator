@@ -152,14 +152,15 @@ function generateScript() {
 
     var imports = [];
     var agentConfig = "";
-    let script = `# AutoGen Script\n`;
-    script += 'import autogen\n';
+    let script = `# AutoGen Script\n\n`;
+    script += '# Import Section - Uncomment import lines as needed\n';
+    script += '#import autogen\n';
     script += `from autogen import AssistantAgent, UserProxyAgent\n`;
-    script += `from autogen.agentchat.contrib.retrieve_assistant_agent import RetrieveAssistantAgent\n`;
-    script += `from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent\n`;
-    script += `from autogen.agentchat.contrib.teachable_agent import TeachableAgent\n`;
-    script += `from autogen.ChatCompletion import ChatCompletion\n`;
-    script += `import chromadb\n\n`;
+    script += `#from autogen.agentchat.contrib.retrieve_assistant_agent import RetrieveAssistantAgent\n`;
+    script += `#from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent\n`;
+    script += `#from autogen.agentchat.contrib.teachable_agent import TeachableAgent\n`;
+    script += `#from autogen.ChatCompletion import ChatCompletion\n`;
+    script += `#import chromadb\n\n`;
     script += `# LLM Key\n`;
 
     
@@ -167,7 +168,7 @@ function generateScript() {
         script += `api_key = "${apiKey}"\n`;
     } else {
         script += `import os\n`;
-        script += `api_key = os.environ("OPENAI_API_KEY")\n`;
+        script += `api_key = os.environ.get("OPENAI_API_KEY")\n`;
         script += `\n\n`;
     }
     // Generate llm_config structure
@@ -177,8 +178,8 @@ function generateScript() {
     script += llm_config + '\n';
     script += `\n\n`;
     script += `# Messaging\n`;
-    script += "ChatCompletion.start_logging()\n"                                                                   
-    script += "termination_msg = 'lambda x: isinstance(x, dict) and 'TERMINATE' == str(x.get('content', ''))[-9:].upper()'\n"
+    script += "#ChatCompletion.start_logging()\n";                                                                   
+    script += "termination_msg = \"\"\"lambda x: isinstance(x, dict) and 'TERMINATE' == str(x.get('content', ''))[-9:].upper()\"\"\"\n";
     script += `\n\n`;
 
     script += `# Assistant Agents\n`;
