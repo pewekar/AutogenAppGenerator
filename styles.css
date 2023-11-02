@@ -13,11 +13,15 @@ h1 {
 
 .input-group {
     margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Adjusted to align with the top of widgets */
 }
 
 label {
-    display: block;
-    margin-bottom: 0.5rem;
+    display: inline-block; /* Allows vertical alignment */
+    vertical-align: middle; /* Centers vertically with the widget */
+    margin-right: 1rem; /* Spacing between the label and its widget */
     font-weight: 500;
 }
 
@@ -32,6 +36,7 @@ select {
     color: #fff;
     font-size: 1rem;
     box-sizing: border-box;
+    margin-right: 1rem; /* Spacing between the widget and the next element */
 }
 
 textarea.full-height {
@@ -48,11 +53,6 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s;
-    margin-right: 1rem;
-}
-
-button:last-child {
-    margin-right: 0;
 }
 
 button:hover {
@@ -62,7 +62,7 @@ button:hover {
 .flex-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Adjusted to align with the top of widgets */
     margin-bottom: 1.5rem;
 }
 
@@ -77,11 +77,8 @@ button:hover {
     margin: 1rem;
 }
 
-
-
-
 .input-group label {
-    margin-bottom: 0.5rem;
+    margin-right: 10px;
 }
 
 .padded-input {
@@ -89,3 +86,68 @@ button:hover {
     padding: 0.8rem 1rem;
 }
 
+.agent-group {
+    border: 1px solid #1f1f1f;
+    padding: 40px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.group-title {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #1f1f1f;
+    padding: 0 10px;
+}
+
+.left-group, .right-group {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.newAssistantLabel {
+    margin-top: 20px;
+}
+
+#assistantAgents select {
+    background-color: #000;  /* Black background color */
+    color: #fff;  /* White text color */
+    border: 1px solid #888;  /* Provides some contrast */
+    appearance: none;  /* Removes default styles */
+    -webkit-appearance: none;  /* For Safari */
+    -moz-appearance: none;  /* For Firefox */
+    vertical-align: middle;  /* Aligns with the adjacent elements */
+    padding-right: 25px;  /* Makes room for custom arrow */
+    background-image: 
+        linear-gradient(45deg, transparent 50%, #fff 50%),
+        linear-gradient(-45deg, transparent 50%, #fff 50%),
+        linear-gradient(to right, #000, #000);  /* Creates the custom white arrow */
+    background-position: 
+        calc(100% - 15px) 50%,  /* Position of downward arrow */
+        calc(100% - 10px) 50%,  /* Position of downward arrow */
+        100% 0;  /* Position of underlying black color */
+    background-size: 
+        5px 5px,  /* Size of arrow */
+        5px 5px,  /* Size of arrow */
+        2.5em 2.5em;  /* Size of background black color */
+    background-repeat: no-repeat;
+}
+
+
+.input-group {
+    display: flex;
+    align-items: center;  /* Aligns items vertically in the center */
+ }
+ 
+ .input-group input.padded-input {
+    margin: 0 5px;  /* Adds some spacing between the input fields */
+ }
+ 
+.input-group .add-button, .remove-button{
+    width: 24px;  /* Sets a fixed width */
+    height: 24px;  /* Sets a fixed height */
+    vertical-align: middle;  /* Aligns with the adjacent elements */
+ }
+ 
