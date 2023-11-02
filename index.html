@@ -2,12 +2,12 @@
 <html>
 <head>
     <!-- Add this inside the <head> tag -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:322,422,522,722&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/15.0.0-canary.15/material-components-web.min.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/15.0.0-canary.15/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/15.2.2-canary.15/material-components-web.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/15.2.2-canary.15/material-components-web.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.2">
     <title>AutoGen Script Generator</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script defer src="script.js"></script>
@@ -16,15 +16,67 @@
             background-color: #1f1f1f;
             color: #ffffff;
         }
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        label {
+            margin-right: 10px;
+        }
+        
+        select, input[type="text"], input[type="checkbox"] {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button.add-button {
+            background-color: #6200ea;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .agent-group {
+            margin-top: 20px;
+        }
+
+        .group-title {
+            margin-bottom: 10px;
+        }
+
+        .padded-input {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body onload="initializePage()" class="dark-mode">
     <h1>AutoGen Script Generator</h1>
-
-    <div class="input-group">
-        <label for="useEnvVar">Use Environment Variable:</label>
+    
+    <!--div class="input-group" style="display: flex; justify-content: flex-start; align-items: center;">
+        <label for="useEnvVar" style="margin-right: 10px;">Use Environment Variable:</label>
         <input type="checkbox" id="useEnvVar" onclick="toggleAPIKeyBox()" checked>
+    </div-->
+    
+    <div class="input-group">
+        <div style="display: flex; align-items: center;">
+            <label for="useEnvVar">Use Environment Variable:</label>
+            <input type="checkbox" id="useEnvVar" onclick="toggleAPIKeyBox()" checked>
+        </div>
     </div>
+    
+    
+
 
     <div class="input-group" id="apiKeyGroup" style="display: none;">
         <label for="apiKey">API Key:</label>
@@ -37,30 +89,80 @@
         <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
         <option value="gpt-4">gpt-4</option>
         <option value="gpt-4-32k">gpt-4-32k</option>
-        <option value="gpt-4-32k-0314">gpt-4-32k-0314</option>
-        <option value="gpt-4-32k-v0314">gpt-4-32k-v0314</option>
+        <option value="gpt-4-32k-2314">gpt-4-32k-2314</option>
+        <option value="gpt-4-32k-v2314">gpt-4-32k-v2314</option>
         </select>
     </div>
 
     <div class="agent-group">
+        <h3 class="group-title">Assistant Agent(s)</h3>
         <div id="assistantAgents">
             <div class="input-group" id="assistant_0">
-                <label for="assistantName_0">Assistant Agent Name:</label>
+                <!--label for="assistantAgentType_0">Agent Type:</label> <-- New line -->
+                <select id="assistantAgentType_0"> <!-- New line -->
+                    <option value="Assistant" selected>Assistant</option> <!-- New line -->
+                    <option value="RAG">RAG</option> <!-- New line -->
+                    <option value="Teachable">Teachable</option> <!-- New line -->
+                </select> <!-- New line -->
+                <!--label for="assistantName_0">Assistant Agent Name:</label-->
                 <input type="text" id="assistantName_0" value="assistant" class="padded-input">
-                <label for="systemMessage_0">System Message:</label>
+                <!--label for="systemMessage_0">System Message:</label-->
                 <input type="text" id="systemMessage_0" name="systemMessage_0" value="You are a helpful AI assistant. You suggest coding and reasoning steps for another AI assistant to accomplish a task.">
                 <button class="add-button" onclick="addAssistantAgent()">+</button>
             </div>
+            <!--div class="input-group" id="assistant_1">
+                <label for="assistantAgentType_1">Agent Type:</label> 
+                <select id="assistantAgentType_1"> 
+                    <option value="Assistant" selected>Assistant</option> 
+                    <option value="RAG">RAG</option> 
+                    <option value="Teachable">Teachable</option> 
+                </select> 
+                <label for="assistantName_1">Assistant Agent Name:</label>
+                <input type="text" id="assistantName_1" value="Simplifier" class="padded-input">
+                <label for="assistantType_1">Type: </label>
+                <select id="assistantType_1">
+                    <option value="Assistant" selected>Assistant</option>
+                    <option value="RAG">RAG</option>
+                    <option value="Teachable">Teachable</option>
+                </select>
+                <label for="systemMessage_1">System Message:</label>
+                <input type="text" id="systemMessage_1" name="systemMessage_1" value="# MAIN PURPOSE
+                You are an instruction optimizer. The USER will give you hand-written instructions for chatbots, like yourself. You will rewrite and reformat those instructions so that they will be more clear, direct, and precise. Optimize them so that you would understand them best.
+                
+                # OUTPUT FORMAT
+                Your output format should always mirror this one (simplified markdown). Always start with a # MISSION or # GOAL section. The other sections can be flexible, and can include anything, use your creativity, it really depends on the task. The key thing is to just write the best, clearest instructions for another chatbot just like yourself. 
+                
+                # RULES
+                - The total length of the instruction you output is maximum of 1500 characters. 
+                - Never use **bold** or *italics*. Header and hyphenated list only. This wastes characters.
+                - Keep It Simple, Stupid: Less is more. Other chatbots are smart, just like you.">
+                <button class="add-button" onclick="addAssistantAgent()">+</button>
+            </div-->
         </div>
     </div>
 
     <div class="input-group">
+        <div class="left-group">
+            <!--label for="userProxyName">User Proxy Agent Name:</label-->
+            <input type="text" id="userProxyName" value="user_proxy">
+        </div>
+        <div class="right-group">
+            <label for="userProxyRAG">  Use RAG:</label> 
+            <input type="checkbox" id="userProxyRAG"> 
+        </div>
+        <input type="text" id="userProxyURL" value='https://...' style="display: none;"> 
+    </div>
+    <!--div class="input-group">
         <label for="userProxyName">User Proxy Agent Name:</label>
         <input type="text" id="userProxyName" value="user_proxy">
-    </div>
+        <label for="userProxyRAG">Use RAG:</label> 
+        <input type="checkbox" id="userProxyRAG"> 
+        <--label for="userProxyURL">URL:</label>
+        <input type="text" id="userProxyURL" value="Enter URL" style="display: none;"> 
+    </div-->
 
     <div class="input-group">
-        <label for="task">Task:</label>
+        <!--label for="task">Task:</label-->
         <input type="text" id="task" placeholder="Enter the task here">
     </div>
     
