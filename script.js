@@ -208,21 +208,21 @@ function generateScript() {
         // If the Use RAG checkbox is selected, add specific RAG-related code here
         script += `\n# RAG User Proxy Agent\n`;
         script += `userProxy = RetrieveUserProxyAgent(\n`;                                                                  
-        script += `    name="${userProxyName}",\n`;                                                                         
-        script += `    is_termination_msg=termination_msg,\n`;                                                              
-        script += `    system_message="Assistant who has extra content retrieval power for solving difficult problems.",\n`;
-        script += `    human_input_mode="TERMINATE",\n`;                                                                    
-        script += `    max_consecutive_auto_reply=3,\n`;                                                                    
-        script += `    retrieve_config={\n`;                                                                                
-        script += `        "task": "code",\n`;                                                                              
-        script += `        "docs_path": "${userProxyURL}",\n`;                                                              
-        script += `        "chunk_token_size": 1000,\n`;                                                                    
-        script += `        "model": config_list[0]["model"],\n`;                                                            
-        script += `        "client": chromadb.PersistentClient(path="/tmp/chromadb"),\n`;                                   
-        script += `        "collection_name": "groupchat",\n`;                                                              
-        script += `        "get_or_create": True,\n`;                                                                       
-        script += `    },\n`;                                                                                               
-        script += `    code_execution_config=False,  # we don't want to execute code in this case.\n`;                      
+        script += `name="${userProxyName}",\n`;                                                                         
+        script += `#is_termination_msg=termination_msg,\n`;                                                              
+        script += `system_message="Assistant who has extra content retrieval power for solving difficult problems.",\n`;
+        script += `human_input_mode="TERMINATE",\n`;                                                                    
+        script += `max_consecutive_auto_reply=3,\n`;                                                                    
+        script += `retrieve_config={\n`;                                                                                
+        script += `    "task": "code",\n`;                                                                              
+        script += `    "docs_path": "${userProxyURL}",\n`;                                                              
+        script += `    "chunk_token_size": 1000,\n`;                                                                    
+        script += `    "model": config_list[0]["model"],\n`;                                                            
+        script += `    "client": chromadb.PersistentClient(path="/tmp/chromadb"),\n`;                                   
+        script += `    "collection_name": "groupchat",\n`;                                                              
+        script += `    "get_or_create": True,\n`;                                                                       
+        script += `},\n`;                                                                                               
+        script += `code_execution_config=False,  # we don't want to execute code in this case.\n`;                      
         script += `)\n`;   
     } else {
         // If the Use RAG checkbox is not selected, add the regular code here
@@ -231,7 +231,7 @@ function generateScript() {
     script += `userProxy = UserProxyAgent(name="${userProxyName}",\n`;
     script += `human_input_mode="NEVER",\n`;
     script += `max_consecutive_auto_reply=10,\n`;
-    script += `is_termination_msg=termination_msg,\n`;
+    script += `#is_termination_msg=termination_msg,\n`;
     script += `code_execution_config={"work_dir": "web"},\n`;
     script += `llm_config=llm_config,\n`;
     script += `system_message=\"\"\"A human admin\"\"\")\n`; 
